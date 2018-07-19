@@ -36,21 +36,50 @@ class StepDWI
 
   def self.convert_dwi_strings(usable_lines, working_hash)
     working_hash[:title] = self.convert_title(usable_lines)
-    # working_hash[:subtitle] = ''
-    # working_hash[:artist] = self.convert_artist(usable_lines)
-    # working_hash[:offset] = self.convert_gap(usable_lines)
+    working_hash[:subtitle] = ''
+    working_hash[:artist] = self.convert_artist(usable_lines)
+    working_hash[:offset] = self.convert_gap(usable_lines)
+    working_hash
   end
 
   def self.convert_title(usable_lines)
+    title_arr = usable_lines.find do |line|
+      line[0].downcase === 'title'
+    end
+
+    if title_arr
+      title_arr[1]
+    else
+      ''
+    end
+  end
+
+  def self.convert_artist(usable_lines)
+    artist_arr = usable_lines.find do |line|
+      line[0].downcase === 'artist'
+    end
+
+    if artist_arr
+      artist_arr[1]
+    else
+      ''
+    end
+  end
+
+  def self.convert_gap(usable_lines)
+    gap_arr = usable_lines.find do |line|
+      line[0].downcase === 'gap'
+    end
+
+    if gap_arr
+      gap_arr[1]
+    else
+      '0'
+    end
+  end
+
+  def self.convert_dwi_stops
     
-  end
-
-  def self.convert_artist
-
-  end
-
-  def self.convert_gap
-
   end
 
 end

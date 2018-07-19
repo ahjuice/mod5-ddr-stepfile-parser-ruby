@@ -11,11 +11,8 @@ class StepDWI
   def self.get_lines(file_path)
     File.foreach(file_path).map do |line|
       if line[0] == '#'
-        line_arr_raw = line.split(/[#:;]/)
-        line_arr_rm_newline = line_arr_raw.map do |line_str|
-          line_str.chomp
-        end
-        line_arr = line_arr_rm_newline.reject(&:empty?)
+        line_arr_raw = line.strip.split(/[#:;]/)
+        line_arr = line_arr_raw.reject(&:empty?)
       end
     end.compact
   end
@@ -79,7 +76,7 @@ class StepDWI
   end
 
   def self.convert_dwi_stops
-    
+
   end
 
 end
